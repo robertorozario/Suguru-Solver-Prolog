@@ -11,6 +11,7 @@ preencher(M, C) :- linha(M, C, R), length(R, N), R ins 1..N, label(R), P is C-1,
 
 %Recebe duas linhas e pega todo o conjunto de 4 posições adjacentes, fazendo
 %adicionando a regra de distinção entre os valores adjacentes
+
 quartetos([P1,P2], [P3,P4]) :- all_distinct([P1,P2,P3,P4]).
 quartetos([P1,P2|TL1], [P3,P4|TL2]) :- all_distinct([P1,P2,P3,P4]), quartetos([P2|TL1], [P4|TL2]).
 
@@ -32,10 +33,10 @@ mostrar_resultado([H|T]) :- write(H), nl, mostrar_resultado(T).
 %tenham valores diferentes e, por fim, preenchendo os valores possíveis
 suguru(Np, Matriz) :- 
     problema(Np, Matriz),
-    matriz_area(Np, Matriz, Matriz_area),
-    maplist(all_distinct, Matriz_area),
     length(Matriz, T),
     arredores(Matriz, T),
+    matriz_area(Np, Matriz, Matriz_area),
+    maplist(all_distinct, Matriz_area),
     length(Matriz_area, L),
     preencher(Matriz_area, L).
 
@@ -111,7 +112,7 @@ matriz_area(104, [
             [F1, F2, F3, F4, F5, F6, F7],
             [G1, G2, G3, G4, G5, G6, G7]
         ], M):-
-    M = [[A1,A2,A3],[A4,A5,A6,A7],[B1,C1,D1,E1,E2,F2],[B2,C2,B3,C3,B4,B5],[B6,B7,C6,C7],[D2,D3,E3],[F1,G1,G2],[C4,C5,D4,D5,E5],[D6,D7,E7,F7],[G2,G3,G4,F3,F4,E4],[G6,G7,F5,F6,E6]].
+    M = [[A1,A2,A3],[A4,A5,A6,A7],[B2,B3,B4,B5,C2,C3],[B6,B7,C6,C7],[B1,C1,D1,E1,E2,F2],[F1,G1,G2],[D2,D3,E3],[C4,C5,D4,D5,E5],[D6,D7,E7,F7],[E4,F3,F4,G3,G4,G5],[E6,F5,F6,G6,G7]].
 
 problema(104,P) :- 
     P = [[2, _, _, _, _, _, 1],
